@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Analog Synthesizer">
+
+  <section class="prose max-w-none">
+    <h1 class="text-3xl font-bold mb-4">Analog Synthesizer</h1>
+
+    <!-- Project Description -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Project Description</h2>
+
+    <p>
+      This project is a fully analog synthesizer with a digital waveform display.
+      The audio signal path is constructed from discrete components, op-amps, and
+      operational transconductance amplifiers (OTAs). The synthesizer includes a
+      voltage-controlled oscillator capable of generating square, triangle, and
+      sine waves from 16 Hz to 16 kHz, followed by a state-variable
+      voltage-controlled filter, voltage-controlled amplifier, and automatic
+      gain control stage.
+    </p>
+
+    <p>
+      Each major voltage-controlled block can also be modulated using its own
+      low-frequency oscillator, operating from 0.1 Hz to 10 Hz, and an ADSR
+      envelope generator. Exponential converters are used to shape control
+      voltages for musical frequency and amplitude control.
+    </p>
+
+    <p>
+      The final audio signal is sent through an output amplifier and speaker.
+      Alongside the analog circuitry, an ESP32 samples control voltages and audio
+      signals and displays their waveforms on an LCD, providing a digital
+      visualization of the synthesizer's operation.
+    </p>
+
+    <!-- Block Diagram -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Block Diagram</h2>
+
+    <figure class="project-figure">
+      <img
+        src="/synthBlock.png"
+        alt="Block diagram of the analog synthesizer"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      The block diagram shows the overall architecture of the synthesizer and
+      the flow of both audio signals and control voltages. The primary audio path
+      begins with waveform generation in the VCO, followed by filtering,
+      amplitude control, automatic gain control, and final audio amplification.
+      Supporting modulation circuitry, including the low-frequency oscillators,
+      ADSR envelope generators, and exponential converters, provides control
+      signals to the voltage-controlled stages.
+    </p>
+
+    <p>
+      The diagram also shows the digital subsystem used to sample and display
+      signals on the LCD, as well as the power-management circuitry that supplies
+      the analog and digital sections of the system.
+    </p>
+
+    <!-- Schematic -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Schematic</h2>
+
+    <div class="border rounded-lg p-6 bg-base-200 text-center">
+      <em>Schematic placeholder</em>
+    </div>
+
+    <p>
+      The schematic contains the complete electrical implementation of the
+      synthesizer. It includes the voltage-controlled oscillator, state-variable
+      filter, voltage-controlled amplifier, automatic gain control loop, ADSR
+      envelope generator, exponential converter, power circuitry, and ESP32
+      interface.
+    </p>
+
+    <p>
+      The major voltage-controlled sections can operate either manually or
+      through external control voltages. Potentiometers provide direct control
+      over parameters such as oscillator frequency and filter cutoff, while the
+      modulation and envelope circuits allow those same parameters to vary
+      automatically over time. A separate manual volume control sets the final
+      output level before the signal reaches the speaker amplifier.
+    </p>
+
+    <!-- Next Steps -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Next Steps</h2>
+
+    <p>
+      The next stage of the project is to simulate and verify each subsystem in
+      LTSpice against its design targets. Once the individual circuits are
+      validated, the complete PCB will be laid out, fabricated, assembled, and
+      physically tested. A custom enclosure will then be modeled and 3D printed,
+      and the ESP32 firmware responsible for sampling signals and rendering
+      waveforms on the LCD will be developed.
+    </p>
+
+    <style>
+      .project-figure {
+        margin: 1.5rem 0;
+      }
+
+      .project-image {
+        width: 100%;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: #f5f5f5;
+      }
+
+      .project-figure figcaption {
+        margin-top: 0.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+    </style>
+
+  </section>
+
+</BaseLayout>

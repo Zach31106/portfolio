@@ -4,89 +4,174 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 ---
 
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
+
+  <!-- Profile -->
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Profile</div>
   </div>
 
-  <div class="mb-10 text-justify">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  <div class="mb-6">
+    <p>
+      Electrical Engineering and Physics student at Northeastern University
+      interested in embedded systems, robotics, analog electronics, and
+      computational tools. I enjoy taking projects from concept through design,
+      fabrication, programming, and testing while using each project as an
+      opportunity to solve new engineering problems and expand my technical
+      skills.
+    </p>
   </div>
 
+  <!-- Resume Buttons -->
+  <div class="flex flex-wrap gap-3 mb-10">
+    <a
+      href="/Zachary_Landry_Resume.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-primary"
+    >
+      View Resume PDF
+    </a>
+
+    <a
+      href="/Zachary_Landry_Resume.pdf"
+      download
+      class="btn btn-outline"
+    >
+      Download Resume
+    </a>
+  </div>
+
+
+  <!-- Education -->
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Education</div>
   </div>
 
   <div class="time-line-container grid gap-4 mb-10">
+
     <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
+      title="B.S. Electrical Engineering and Physics"
+      subtitle="September 2024 – April 2028 | Northeastern University, Boston, MA"
+    >
+      <p>
+        GPA: 4.0 | Dean's List
+      </p>
+
+      <p>
+        Relevant coursework includes Fundamentals of Electronics, Embedded
+        Design, Computing Fundamentals, Calculus III, Differential Equations
+        & Linear Algebra, Quantum Mechanics, and Electricity & Magnetism.
+      </p>
+
+      <p>
+        Current coursework includes Electronic Design, Linear Systems,
+        Classical Dynamics, and Advanced Quantum Mechanics.
+      </p>
+    </TimeLineElement>
+
   </div>
 
+
+  <!-- Experience -->
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Experience</div>
   </div>
 
   <div class="time-line-container mb-10">
+
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="Electrical Engineering Co-op — Massa"
+      subtitle="January 2026 – June 2026 | Hingham, Massachusetts"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+      <ul class="list-disc ml-5">
+        <li>
+          Designed and built an ultra-low-power PIC-based embedded system on a
+          custom PCB, integrating an external sensor module for field data
+          acquisition.
+        </li>
+
+        <li>
+          Developed a multi-stage analog filter chain to condition sensor
+          signals for high-accuracy ADC sampling.
+        </li>
+
+        <li>
+          Diagnosed and resolved PCB failures using oscilloscopes, signal
+          tracing, and component-level debugging.
+        </li>
+      </ul>
     </TimeLineElement>
+
+
     <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
+      title="Engineering Research Assistant — Northeastern University"
+      subtitle="June 2025 – Present | Boston, Massachusetts"
     >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+      <ul class="list-disc ml-5">
+        <li>
+          Built an open-source AI-integrated pair of glasses for research and
+          development.
+        </li>
+
+        <li>
+          Designed a waveguide-based lens display system and developed embedded
+          graphics software for on-lens visualization.
+        </li>
+      </ul>
     </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
+
   </div>
 
+
+  <!-- Activities -->
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Certifications</div>
+    <div class="text-3xl w-full font-bold">Activities</div>
   </div>
 
   <ul class="list-disc mx-6 mb-10 grid gap-2">
-    <li>
-      <a href="#" target="_blank"> Certification Name (with link)</a>
-    </li>
-    <li>
-      <a href="#" target="_blank"> Certification Name (with link)</a>
-    </li>
+    <li>IEEE</li>
+    <li>Generate</li>
+    <li>College of Engineering Tutoring</li>
+    <li>Downhillers</li>
+    <li>NUHOC</li>
   </ul>
 
+
+  <!-- Skills -->
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Skills</div>
   </div>
 
-  <ul class="list-disc md:columns-5 columns-2 mx-6">
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-  </ul>
+  <div class="mb-4">
+    <div class="text-xl font-semibold mb-2">Electronics</div>
+
+    <ul class="list-disc md:columns-3 columns-2 mx-6">
+      <li>Breadboarding</li>
+      <li>THT/SMD Soldering</li>
+      <li>Analog Circuit Design</li>
+      <li>Embedded Hardware Design</li>
+      <li>PCB Layout</li>
+      <li>Oscilloscope</li>
+      <li>Digital Multimeter</li>
+      <li>Function Generator</li>
+    </ul>
+  </div>
+
+
+  <div class="mb-10">
+    <div class="text-xl font-semibold mb-2">Software & Programming</div>
+
+    <ul class="list-disc md:columns-3 columns-2 mx-6">
+      <li>KiCad</li>
+      <li>LTspice</li>
+      <li>AutoCAD</li>
+      <li>SolidWorks</li>
+      <li>C++</li>
+      <li>Python</li>
+      <li>Arduino</li>
+      <li>MATLAB</li>
+      <li>Excel</li>
+    </ul>
+  </div>
+
 </BaseLayout>

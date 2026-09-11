@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Analog RF Receiver">
+
+  <section class="prose max-w-none">
+    <h1 class="text-3xl font-bold mb-4">Analog RF Receiver</h1>
+
+    <!-- Project Description -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Project Description</h2>
+
+    <p>
+      This project is a planned analog RF receiver capable of receiving both AM and
+      FM radio broadcasts. The goal is to build as much of the signal path as
+      possible using discrete analog circuitry, although integrated circuits may be
+      introduced where necessary as the design is developed and tested.
+    </p>
+
+    <p>
+      Signals received by the antenna will be routed through separate AM and FM
+      signal paths. In each path, the selected radio-frequency signal will be
+      filtered, amplified, and mixed with a local oscillator to convert it to a
+      lower intermediate frequency. The intermediate-frequency signal can then be
+      filtered and amplified before being demodulated and sent through the final
+      audio stages to a speaker.
+    </p>
+
+    <p>
+      In addition to receiving and playing radio broadcasts, the receiver is
+      planned to include a digital visualization system. After demodulation and
+      signal conditioning, an ADC will sample the signal so that a microcontroller
+      can analyze its frequency content and display information about the received
+      channel on an LCD.
+    </p>
+
+    <!-- Block Diagram -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Block Diagram</h2>
+
+    <figure class="project-figure">
+      <img
+        src="/rfBlock.png"
+        alt="Block diagram of the AM and FM RF receiver"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      The block diagram shows the current planned architecture of the receiver.
+      After entering through the antenna and protection circuitry, the incoming
+      signal is directed by a band switch into either the AM or FM path. Each path
+      begins with a band-pass filter and low-noise amplifier before the selected
+      station is mixed with a local oscillator. This converts the desired RF signal
+      to an intermediate frequency that can be filtered and amplified more easily.
+    </p>
+
+    <p>
+      The two paths use different demodulation stages. The AM path uses an envelope
+      detector to recover the transmitted audio signal, while the FM path uses an
+      FM demodulator. Automatic gain control is included before demodulation to help
+      maintain a more consistent signal level. The recovered audio then passes
+      through volume control and an audio amplifier before reaching the speaker.
+    </p>
+
+    <p>
+      A parallel digital path is also planned for signal analysis. The conditioned
+      signal is passed through an anti-aliasing filter and sampled by an ADC before
+      being processed by a microcontroller. The current processing plan includes
+      DC-offset removal, windowing, a Fast Fourier Transform, and normalization.
+      This would allow the LCD to display the frequency content of the currently
+      selected channel, with the possibility of displaying stored waveforms or a
+      spectrogram as the project develops.
+    </p>
+
+    <p>
+      The design also includes its own power-management system, consisting of a
+      USB-C input, battery, charging and protection circuitry, a power switch, and
+      regulated supply rails for the analog and digital sections.
+    </p>
+
+    <!-- Up Next -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Next Steps</h2>
+
+    <p>
+      The next stage of the project will be to move from the system-level block
+      diagram to individual circuit designs. Each section of the receiver will be
+      designed and simulated separately, beginning with the RF filtering,
+      amplification, mixing, and intermediate-frequency stages. The AM and FM
+      demodulation circuits will then be developed and evaluated before the full
+      analog signal chain is combined.
+    </p>
+
+    <p>
+      Once the receiver path is established, the power system and digital analysis
+      section will be developed. This will include selecting an ADC and
+      microcontroller, determining an appropriate sampling rate, and implementing
+      the signal-processing steps required to calculate and display the frequency
+      spectrum on the LCD.
+    </p>
+
+    <p>
+      Because this is currently an early-stage design, part of the development
+      process will also involve determining which sections can realistically be
+      implemented using discrete analog circuitry and where integrated circuits may
+      provide better performance or practicality. After the individual subsystems
+      have been simulated and tested, the final design can be integrated into a
+      PCB and enclosure.
+    </p>
+
+  </section>
+
+</BaseLayout>

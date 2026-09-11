@@ -11,68 +11,58 @@ const last_posts = posts.slice(0, 3);
 
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">I'm Manuel Ernesto</div>
-    <div class="text-3xl py-3 font-bold">Software Engineer and Entrepreneur</div>
+    
+    <div class="text-5xl font-bold">I'm Zachary Landry</div>
+
+    <div class="text-3xl py-3 font-bold">
+      Electrical Engineering and Physics Student at Northeastern University
+    </div>
+
     <div class="py-2">
       <text class="text-lg">
-        This is <b>Astrofy</b> a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS.
-        Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed. I hope you find
-        it useful!
+        I’m interested in embedded systems, robotics, analog electronics, and computational tools. I enjoy taking projects from concept through design, fabrication, programming, and testing, using each one as an opportunity to solve new engineering problems and expand my technical skills.
       </text>
     </div>
-    <div class="mt-8">
-      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
-      <a href="https://github.com/manuelernestog/astrofy" target="_blank" class="btn btn-outline ml-5">
-        Get This template
-      </a>
-    </div>
   </div>
 
   <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+    <div class="text-3xl w-full font-bold mb-2">My Projects</div>
   </div>
 
   <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
+    title="Hexapod Robot"
+    img="/HexBod.png"
+    desc="Custom designed hexapod robot with wireless controls. Can walk around, wave, and dance with stable movement. The 3D designed and printed body and legs are paired with a custom designed PCB which connects the servo drivers, microcontroller, and battery charging circuitry."
+    url="/projects/hexapod"
   />
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
+  <div class="divider my-0"></div>
 
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+  <HorizontalCard
+    title="Differential Equation Visualizer"
+    img="/2.png"
+    desc="Find the graphical solution to any first or second order ordinary differential equation. Initial values and window parameters can be set. First order solutions are graphed with their slope field. Special functions like sine, unit step, and impulse are available."
+    url="/projects/diffeq"
+  />
+
+  <div class="divider my-0"></div>
+
+  <HorizontalCard
+    title="Analog Synthesizer"
+    img="/synthpic.webp"
+    desc="Analog synthesizer with no IC's (aside from op-amps and OTA's) in the signal chain. Complete with manual and voltage controlled signals, custom PCB, battery charging circuitry, and 3D printed housing. Hear your music and see what wave its composed of on the LCD screen with custom code."
+    url="/projects/synth"
+    badge="Work in Progress"
+  />
+
+  <div class="divider my-0"></div>
+
+  <HorizontalCard
+    title="Analog RF Reciever"
+    img="/rfpic.jpg"
+    desc="Switch between AM and FM bands to listen in on radio channels. Additionally, capture a moment of the demodulated signal to see its frequency spectrum through Fourier analysis."
+    url="/projects/rf-receiver"
+    badge="Work in Progress"
+  />
+
 </BaseLayout>

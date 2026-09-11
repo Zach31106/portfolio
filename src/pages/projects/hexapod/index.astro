@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Hexapod Robot">
+  <section class="prose max-w-none">
+
+    <h1 class="text-3xl font-bold mb-4">
+      Hexapod Robot
+    </h1>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Project Description
+    </h2>
+
+    <p>
+      This project involved designing and building a six-legged hexapod robot from the ground up. I designed and 3D modeled the robot's mechanical structure, fabricated the components using 3D printing, designed the electronics, and developed the embedded software used to control the robot.
+    </p>
+
+    <p>
+      The robot is powered by an ESP32 programmed through the Arduino IDE and is controlled wirelessly using the ESP-NOW communication protocol. A separate handheld controller, which I also designed, sends movement commands to the robot without requiring a traditional Wi-Fi network.
+    </p>
+
+    <p>
+      The robot uses a tripod gait, dividing the six legs into two alternating groups of three. This gait provides a stable walking pattern while allowing the robot to move efficiently. Foot positions are translated into individual joint angles using inverse kinematics, allowing coordinated control of the three servos in each leg.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Video Demonstration
+    </h2>
+
+    <div class="border rounded-lg p-6 bg-base-200 text-center">
+      <em>Video placeholder</em>
+    </div>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      How it Works
+    </h2>
+
+    <p>
+      The robot's control system is centered around an ESP32, which receives movement commands wirelessly from the handheld controller using ESP-NOW. The received data is stored in a structured packet containing the controller inputs and state information. The ESP32 then uses these commands to determine how the robot should move.
+    </p>
+
+    <p>
+      Walking is accomplished using a tripod gait. The six legs are divided into two groups: legs 1, 3, and 5 form one tripod, while legs 2, 4, and 6 form the other. The robot alternates between these two groups, moving one tripod while the other maintains contact with the ground. The programmed gait changes both the horizontal and vertical position of the legs to produce a stepping motion.
+    </p>
+
+    <p>
+      The position of each foot is converted into three servo angles using inverse kinematics. The first joint controls the horizontal rotation of the leg, while the remaining joints control the position of the leg in the vertical plane. The code calculates intermediate geometric quantities from the requested X, Y, and Z foot coordinates and uses trigonometric relationships to determine the required joint angles.
+    </p>
+
+    <p>
+      For example, the code first calculates the horizontal distance from the leg's base to the requested foot position and then determines the effective distance between the leg joints. The law of cosines and inverse trigonometric functions are then used to determine the individual joint angles. Adjustments are applied for the different orientations of the left and right sides of the robot so that the same mathematical model can be used across all six legs.
+    </p>
+
+    <p>
+      Once the joint angles are calculated, they are converted into PWM pulse values and sent to the appropriate servo channels. Two Adafruit PWM Servo Driver boards are used to provide the PWM signals required to control the robot's many servos.
+    </p>
+
+    <figure class="project-figure ik-diagram">
+      <img
+        src="/RobotLeg.drawio.png"
+        alt="Generalized inverse kinematics geometry for one hexapod leg"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      Generalized geometry of a single leg showing the joint lengths, foot position, and angles used to derive the inverse-kinematics solution.
+    </p>
+
+    <p>
+      This approach allows the robot to operate using desired foot positions rather than requiring every servo angle to be manually specified. The same inverse-kinematics function can therefore be applied to each of the six legs while accounting for their individual orientations.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Physical Components
+    </h2>
+
+    <p>
+      The robot's body and leg assemblies were fully designed and 3D modeled before being fabricated using 3D printing.
+    </p>
+
+    <figure class="project-figure">
+      <img
+        src="/HexBod.png"
+        alt="3D model of the hexapod robot"
+        class="project-image"
+      />
+    </figure>
+    
+    <p>
+      I also designed a custom PCB to organize the robot's electrical connections and provide a cleaner interface between the control electronics, servo drivers, and power system. The PCB also incorporates a charging circuit for a single-cell LiPo battery, along with a 5 V, 10 A step-up converter to supply the robot's power system.
+    </p>
+
+    <figure class="project-figure">
+      <img
+        src="/HexPCB.png"
+        alt="3D model of the hexapod robot"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      The robot uses two Adafruit PWM Servo Driver boards to simplify control of the large number of servos required by the six-legged design. The two boards are configured at separate I2C addresses, allowing the ESP32 to communicate with both boards while providing dedicated PWM channels for the robot's actuators.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Engineering Challenges
+    </h2>
+
+    <p>
+      This was my first project of this scale, so a major part of the development process involved learning how to approach unfamiliar engineering problems from the ground up. Rather than working from an established design, I had to identify problems, develop possible solutions, test them on the physical system, and iterate on both the hardware and software.
+    </p>
+
+    <p>
+      One of the largest challenges was developing the inverse kinematics for each leg. The robot does not directly specify individual servo angles during normal operation; instead, the desired position of each foot must be converted into the corresponding joint angles. This required deriving the geometry of the leg, applying trigonometric relationships, and accounting for the different orientations of the six legs. Small errors in the calculations could result in significant differences in foot position, making calibration and testing an important part of the process.
+    </p>
+
+    <p>
+      Power management was another major challenge. A hexapod requires a large number of servos, and multiple servos can operate simultaneously during a walking cycle. Managing the power distribution and ensuring that the motors could operate reliably without interfering with the ESP32 and control electronics required careful electrical planning and testing.
+    </p>
+
+    <p>
+      The final major challenge was robot stability. A walking robot must
+      coordinate its legs so that enough of the body remains supported
+      throughout each step. Developing the tripod gait required tuning the
+      foot positions and timing of the two leg groups so that the robot could
+      lift and reposition one tripod while maintaining a stable support base
+      with the other three legs.
+    </p>
+
+    <style>
+      .project-figure {
+        margin: 1.5rem 0;
+      }
+
+      .project-image {
+        width: 100%;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: #f5f5f5;
+      }
+
+      .project-figure figcaption {
+        margin-top: 0.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+
+      .ik-diagram {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+
+  </section>
+</BaseLayout>
