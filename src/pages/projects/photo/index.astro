@@ -1,0 +1,247 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Digital Photo Frame">
+  <section class="prose max-w-none">
+
+    <h1 class="text-3xl font-bold mb-4">
+      Digital Photo Frame
+    </h1>
+
+    <!-- Project Description -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Project Description
+    </h2>
+
+    <p>
+      This project is a wireless digital photo frame built around an ESP32 and
+      touchscreen display. The goal was to create a standalone device that allows
+      photos to be added wirelessly without requiring a wired connection, removable
+      storage, or a dedicated mobile application.
+    </p>
+
+    <p>
+      The photo frame hosts its own web interface, allowing a user to connect with
+      a phone or computer, scan a QR code displayed on the frame, and upload images
+      directly through a web browser. Uploaded images are stored on an SD card and
+      displayed as part of an automatically cycling slideshow.
+    </p>
+
+    <p>
+      In addition to the firmware, I designed a custom PCB containing the ESP32,
+      USB programming interface, battery charging and protection circuitry, power
+      regulation, and connections for the display module. The project combines
+      embedded programming, web development, digital hardware design, power
+      electronics, and user-interface development in a single device.
+    </p>
+
+
+    <!-- How it Works -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      How it Works
+    </h2>
+
+    <p>
+      The ESP32 controls the display, touchscreen, SD card, and wireless
+      communication. During normal operation, JPEG images stored on the SD card
+      are decoded and displayed sequentially on the screen to create a slideshow.
+      The firmware keeps track of the available image files and periodically
+      advances to the next image.
+    </p>
+
+    <p>
+      Photos can also be added wirelessly. The ESP32 hosts a local web server that
+      provides an upload interface which can be accessed from a phone or computer.
+      A QR code displayed by the photo frame directs the user to the upload page,
+      eliminating the need to manually enter an address.
+    </p>
+
+    <p>
+      Before an image is uploaded, the browser interface allows the user to crop,
+      rotate, and position the photo. The image is then resized to match the
+      display resolution and converted to JPEG format before being transferred to
+      the ESP32. Performing this processing in the browser reduces the amount of
+      image processing required by the microcontroller.
+    </p>
+
+    <p>
+      Once received, the ESP32 stores the image on the SD card, where it becomes
+      available to the slideshow. The web interface can also display the files
+      currently stored on the frame and provides controls for removing images.
+    </p>
+
+
+    <!-- Schematic and PCB -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Schematic and PCB
+    </h2>
+
+    <p>
+      A custom PCB was designed to integrate the major electrical subsystems of
+      the photo frame into a single board. The design includes an ESP32-WROOM
+      module, USB-C power and data connections, a USB-to-UART programming
+      interface, battery management circuitry, voltage regulation, and the
+      connections required by the touchscreen display module.
+    </p>
+
+    <p>
+      The power system is designed around a single-cell LiPo battery. Separate
+      regulation stages provide the supply rails required by the display and
+      digital electronics, while the USB-C connection provides both external
+      power and a programming interface for the ESP32.
+    </p>
+
+    <figure class="project-figure">
+      <img
+        src="/PhotoFrame.png"
+        alt="Block diagram of the analog synthesizer"
+        class="project-image"
+      />
+    </figure>
+
+    <figure class="project-figure">
+      <img
+        src="/photoPCB.png"
+        alt="Block diagram of the analog synthesizer"
+        class="project-image"
+      />
+    </figure>
+
+
+    <!-- Firmware -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Firmware and Software
+    </h2>
+
+    <p>
+      The firmware is divided into several modules so that image handling,
+      networking, user-interface control, and hardware interaction can be
+      developed independently.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">
+      Image Storage and Slideshow
+    </h3>
+
+    <p>
+      At startup, the ESP32 scans the SD card for JPEG images and builds a list
+      of available files. The images are decoded directly from the SD card and
+      sent to the TFT display. A slideshow manager cycles through the stored
+      images at a defined interval while allowing the touchscreen interface to
+      temporarily interrupt normal playback.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">
+      Wireless Photo Upload
+    </h3>
+
+    <p>
+      A web server running directly on the ESP32 provides the browser interface
+      used to manage the photo library. HTTP routes handle the main webpage,
+      supporting files, image uploads, file listings, and photo deletion.
+      Because the interface is served by the photo frame itself, no dedicated
+      application is required on the user's phone or computer.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">
+      Browser-Side Image Processing
+    </h3>
+
+    <p>
+      The upload page performs image preparation before transferring a photo to
+      the frame. The user can select portrait or landscape orientation, crop the
+      image, rotate it, and adjust its position. The browser then generates an
+      appropriately sized JPEG that can be stored and displayed directly by the
+      embedded system.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">
+      QR Code Interface
+    </h3>
+
+    <p>
+      The firmware can generate a QR code containing the address of the photo
+      upload page and render it directly on the TFT display. This provides a
+      simple connection workflow: the user opens the upload screen on the photo
+      frame, scans the displayed code, and is taken directly to the browser
+      interface.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">
+      Touchscreen and User Interface
+    </h3>
+
+    <p>
+      Touch input is handled separately from the slideshow and is routed through
+      a UI state system. This allows the display to switch between normal photo
+      playback and interactive screens such as menus, wireless configuration,
+      photo uploading, and device settings. The interface is structured so that
+      additional configuration options can be added without modifying the core
+      slideshow logic.
+    </p>
+
+
+    <!-- Next Steps -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Next Steps
+    </h2>
+
+    <p>
+      The next stage of the project is hardware bring-up and debugging of the
+      custom PCB. The individual electrical subsystems will be tested to verify
+      the power rails, USB programming interface, battery operation, ESP32
+      functionality, and communication with the display before the complete
+      system is assembled.
+    </p>
+
+    <p>
+      The firmware will also continue to be refined. Planned improvements include
+      a more polished touchscreen interface, better photo-library management,
+      improved image handling and slideshow behavior, and additional user
+      settings.
+    </p>
+
+    <p>
+      Once the electronics and firmware are finalized, the last major step will
+      be designing and 3D printing a physical enclosure that houses the display,
+      PCB, battery, and supporting hardware as a finished standalone photo frame.
+    </p>
+
+
+    <style>
+      .project-figure {
+        margin: 1.5rem 0;
+      }
+
+      .project-image {
+        width: 100%;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: #f5f5f5;
+      }
+
+      .project-figure figcaption {
+        margin-top: 0.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+
+      .image-placeholder {
+        width: 100%;
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #aaa;
+        border-radius: 8px;
+        background: rgba(128, 128, 128, 0.08);
+        font-size: 1rem;
+        opacity: 0.7;
+      }
+    </style>
+
+  </section>
+</BaseLayout>

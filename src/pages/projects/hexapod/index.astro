@@ -29,9 +29,24 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
       Video Demonstration
     </h2>
 
-    <div class="border rounded-lg p-6 bg-base-200 text-center">
-      <em>Video placeholder</em>
-    </div>
+    <figure class="project-figure video-figure">
+      <video
+        class="project-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label="Hexapod robot movement demonstration"
+      >
+        <source src="/moveRobot.mp4" type="video/mp4" />
+        Your browser does not support embedded video.
+      </video>
+
+      <figcaption>
+        Demonstration of the completed hexapod movement system.
+      </figcaption>
+    </figure>
 
     <h2 class="text-2xl font-semibold mt-8 mb-2">
       How it Works
@@ -96,7 +111,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
     <figure class="project-figure">
       <img
         src="/HexPCB.png"
-        alt="3D model of the hexapod robot"
+        alt="Custom PCB for the hexapod robot"
         class="project-image"
       />
     </figure>
@@ -154,6 +169,22 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
+      }
+
+      .video-figure {
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .project-video {
+        width: 100%;
+        max-height: 650px;
+        display: block;
+        object-fit: contain;
+        background: #111;
+        border-radius: 8px;
+        border: 1px solid #ddd;
       }
     </style>
 
