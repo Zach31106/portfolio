@@ -1,0 +1,355 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Analog Temperature Sensor">
+
+  <section class="prose max-w-none">
+
+    <h1 class="text-3xl font-bold mb-4">
+      Analog Temperature Sensor
+    </h1>
+
+    <!-- Project Description -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Project Description
+    </h2>
+
+    <p>
+      This project is a fully analog temperature sensor designed using
+      diode-connected BJTs and precision analog circuitry. Two matched BJTs are
+      biased at different current levels, producing a temperature-dependent
+      voltage difference that is amplified and scaled to create an output
+      directly proportional to temperature in degrees Fahrenheit.
+    </p>
+
+    <p>
+      The two sensor currents are generated from a common reference branch using
+      a current mirror and Widlar current source. This establishes a controlled
+      current ratio between the sensing transistors while allowing both devices
+      to operate from the same reference.
+    </p>
+
+    <p>
+      The resulting voltage difference is processed by a differential amplifier
+      and scaled so that a 1 mV increase in output voltage corresponds to a
+      1 °F increase in temperature. Particular attention was given to reducing
+      errors caused by op-amp offset voltage, offset current, and input bias
+      currents, resulting in an estimated amplifier error of approximately
+      0.86 mV.
+    </p>
+
+
+    <!-- How it Works -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      How it Works
+    </h2>
+
+    <p>
+      The temperature measurement is based on the relationship between a BJT's
+      base-emitter voltage, collector current, and absolute temperature. Rather
+      than using the base-emitter voltage of a single transistor as the
+      temperature signal, the circuit compares two matched diode-connected BJTs
+      operating at different currents.
+    </p>
+
+    <p>
+      The two sensing transistors are biased using currents derived from the
+      same reference branch. A current mirror establishes one sensor current,
+      while a Widlar current source generates a lower current for the second
+      transistor. The ratio between these currents determines the sensitivity
+      of the differential sensor voltage.
+    </p>
+
+    <p>
+      Subtracting the two junction voltages removes the saturation-current term
+      shared by the matched devices and leaves a voltage proportional to
+      absolute temperature. The sensor therefore produces a small differential
+      voltage that changes approximately linearly with temperature.
+    </p>
+
+    <p>
+      The two sensor voltages, V1 and V2, are passed into a differential
+      amplifier. The amplifier scales the small temperature-dependent
+      difference while a reference voltage shifts the output so that it
+      directly represents temperature in degrees Fahrenheit.
+    </p>
+
+
+    <!-- Design Equations -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Design Equations
+    </h2>
+
+    <p>
+      For two matched diode-connected BJTs operating at different collector
+      currents, subtracting their base-emitter voltages gives the
+      temperature-dependent sensor voltage:
+    </p>
+
+    <div class="equation">
+      V<sub>s</sub> =
+      ΔV<sub>BE</sub> =
+      (kT / q) ln(I<sub>1</sub> / I<sub>2</sub>)
+    </div>
+
+    <p>
+      The temperature sensitivity is therefore set by the ratio between the two
+      BJT bias currents. For a desired sensor slope <em>a</em> in volts per
+      degree Fahrenheit, the required current ratio is determined from:
+    </p>
+
+    <div class="equation">
+      a =
+      (5k / 9q)
+      ln(I<sub>1</sub> / I<sub>2</sub>)
+    </div>
+
+    <p>
+      After selecting one sensor current, this relationship determines the
+      second current required to produce the desired temperature sensitivity.
+      The two currents are generated from the same reference branch using a
+      current mirror and Widlar current source.
+    </p>
+
+    <p>
+      The reference resistor is selected from the total current required by the
+      bias network and the available supply voltage:
+    </p>
+
+    <div class="equation">
+      R<sub>ref</sub> =
+      (|V<sub>SS</sub>| - V<sub>BE</sub>) /
+      I<sub>ref</sub>
+    </div>
+
+    <p>
+      The emitter resistor in the Widlar source establishes the reduced current
+      in the second sensor branch. Its value is determined from the
+      base-emitter voltage difference produced by the selected current ratio:
+    </p>
+
+    <div class="equation">
+      R<sub>Widlar</sub> =
+      V<sub>T</sub>
+      ln(I<sub>1</sub> / I<sub>2</sub>) /
+      I<sub>E2</sub>
+    </div>
+
+    <p>
+      These component values establish the two sensor bias currents directly
+      from a single reference branch, producing the required
+      temperature-dependent differential voltage before amplification.
+    </p>
+
+    <p>
+      The differential amplifier then scales and offsets the sensor voltage so
+      that the final output changes by 1 mV for every 1 °F change in
+      temperature:
+    </p>
+
+    <div class="equation">
+      V<sub>o</sub> = GV<sub>s</sub> + CV<sub>ref</sub>
+    </div>
+
+
+    <!-- Schematic -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Schematic
+    </h2>
+
+    <figure class="project-figure">
+      <img
+        src="/TempSensor.png"
+        alt="Analog temperature sensor schematic"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      The left side of the schematic generates the two temperature-dependent
+      sensor voltages. The sensing BJTs are biased from a shared reference
+      branch, with a current mirror producing one bias current and a Widlar
+      source producing the second.
+    </p>
+
+    <p>
+      The right side contains the differential amplification stages. The small
+      voltage difference generated by the sensor is amplified while a reference
+      voltage establishes the output offset required for direct conversion to
+      degrees Fahrenheit.
+    </p>
+
+
+    <!-- Error Reduction -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Error Reduction
+    </h2>
+
+    <p>
+      Since the raw voltage generated by the BJT pair is small, op-amp
+      nonidealities can produce errors comparable to the signal being measured.
+      The amplifier was therefore designed using nonideal op-amp models rather
+      than assuming ideal behavior.
+    </p>
+
+    <p>
+      Input bias-current error was addressed by matching the equivalent
+      resistance seen by the two inputs of each amplifier. The compensating
+      resistors are chosen from the parallel combinations of the corresponding
+      feedback and input resistors, causing the voltage drops created by equal
+      input bias currents to cancel.
+    </p>
+
+    <p>
+      After this cancellation, the remaining amplifier error is primarily
+      determined by the input offset voltage and input offset current. The
+      resulting output error can be expressed as:
+    </p>
+
+    <div class="equation">
+      V<sub>o,error</sub> =
+      2GV<sub>OS</sub> +
+      I<sub>OS</sub>R<sub>2</sub>
+    </div>
+
+    <p>
+      The op-amp and resistor values were selected to minimize this error while
+      maintaining the required temperature gain. For the final amplifier
+      design, the calculated output error is approximately 0.86 mV, corresponding
+      to less than approximately one degree Fahrenheit at the 1 mV/°F output
+      sensitivity.
+    </p>
+
+
+    <!-- Results and Validation -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Results and Validation
+    </h2>
+
+    <p>
+      The completed circuit was simulated across the intended temperature range
+      to verify both the output scaling and the effect of circuit
+      nonidealities. The resulting transfer characteristic remains linear,
+      allowing the output voltage to be interpreted directly as temperature.
+    </p>
+
+    <figure class="project-figure">
+      <img
+        src="/TempTransfer.png"
+        alt="Analog temperature sensor transfer plot"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      In addition to the nominal transfer characteristic, the circuit was
+      simulated with the modeled op-amp errors included. Comparing the nonideal
+      output against the ideal response provides a direct measurement of the
+      error introduced by the amplification stages.
+    </p>
+
+    <figure class="project-figure">
+      <img
+        src="/TempError.png"
+        alt="Analog temperature sensor output error plot"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      Individual operating points were also checked against the theoretical
+      transfer relationship to verify the circuit at specific temperatures.
+      These values provide an additional comparison between the analytical
+      design and the simulated circuit response.
+    </p>
+
+    <figure class="project-figure">
+      <img
+        src="/TempValidation.png"
+        alt="Analog temperature sensor validation points"
+        class="project-image"
+      />
+    </figure>
+
+
+    <!-- Design Result -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">
+      Design Result
+    </h2>
+
+    <p>
+      The completed signal chain converts the small temperature-dependent
+      voltage generated by the BJT pair into an easily interpreted analog
+      output. Increasing the temperature by 1 °F produces an approximately
+      1 mV increase in output voltage, allowing temperature to be determined
+      directly from the measured voltage.
+    </p>
+
+    <p>
+      The project combines transistor-level temperature sensing, current-mirror
+      design, a Widlar current source, differential amplification, and nonideal
+      op-amp analysis to create a complete analog sensing system. The resulting
+      circuit demonstrates how device-level transistor behavior can be converted
+      into a practical and accurately scaled measurement.
+    </p>
+
+
+    <style>
+      .project-figure {
+        margin: 1.5rem 0;
+      }
+
+      .project-image {
+        width: 100%;
+        display: block;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background: #f5f5f5;
+      }
+
+      .project-figure figcaption {
+        margin-top: 0.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.7;
+      }
+
+      .ik-diagram {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .video-figure {
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .project-video {
+        width: 100%;
+        max-height: 650px;
+        display: block;
+        object-fit: contain;
+        background: #111;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      .equation {
+        margin: 1.5rem auto;
+        padding: 1rem 1.5rem;
+        width: fit-content;
+        max-width: 100%;
+        text-align: center;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 1.25rem;
+        border-radius: 8px;
+        background: rgba(128, 128, 128, 0.08);
+      }
+    </style>
+
+  </section>
+
+</BaseLayout>
