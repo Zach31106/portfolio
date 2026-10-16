@@ -1,3 +1,4 @@
+
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 ---
@@ -132,14 +133,77 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
       amplifier.
     </p>
 
+    <!-- Simulation Results -->
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Simulation Results</h2>
+
+    <p>
+      LTspice simulations were performed to verify the operation of the
+      function generator and voltage-controlled amplifier. The function
+      generator was tested at several frequencies by adjusting the timing
+      resistance, while the voltage-controlled amplifier was tested using
+      a varying control voltage.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Function Generator</h3>
+
+    <figure class="project-figure">
+      <img
+        src="/FG_Sim1.png"
+        alt="Low-frequency function generator simulation"
+        class="project-image"
+      />
+    </figure>
+
+    <figure class="project-figure">
+      <img
+        src="/FG_Sim2.png"
+        alt="Mid-frequency function generator simulation"
+        class="project-image"
+      />
+    </figure>
+
+    <figure class="project-figure">
+      <img
+        src="/FG_Sim3.png"
+        alt="High-frequency function generator simulation"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      The simulations show the square, triangle, and sine waveforms produced
+      by the function generator at three different operating frequencies.
+      Adjusting the timing resistance changes the oscillation frequency
+      while maintaining the intended waveform shapes.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Voltage-Controlled Amplifier</h3>
+
+    <figure class="project-figure">
+      <img
+        src="/VCA_Sim.png"
+        alt="Voltage-controlled amplifier LTspice simulation"
+        class="project-image"
+      />
+    </figure>
+
+    <p>
+      The voltage-controlled amplifier was simulated using a constant
+      amplitude sinusoidal input and a linearly increasing control voltage.
+      As the control voltage increases, the output amplitude also increases
+      while the input signal remains unchanged. This demonstrates the
+      variable gain produced by controlling the transconductance of the
+      LM13700 OTA.
+    </p>
+
     <!-- Next Steps -->
     <h2 class="text-2xl font-semibold mt-8 mb-2">Next Steps</h2>
 
     <p>
-      The next stage of the project is to continue simulating and verifying the
-      individual subsystems in LTSpice against their design targets. Once the
-      circuits are fully validated, the complete PCB will be laid out,
-      fabricated, assembled, and physically tested.
+      The next stage of the project is to continue simulating and verifying
+      the remaining subsystems in LTspice against their design targets.
+      Once the circuits are fully validated, the complete PCB will be
+      laid out, fabricated, assembled, and physically tested.
     </p>
 
     <p>
